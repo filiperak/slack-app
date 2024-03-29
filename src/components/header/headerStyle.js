@@ -1,29 +1,6 @@
-import { AccessTime, HelpOutline } from '@mui/icons-material';
-import { Avatar } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import styled from 'styled-components';
+import { Avatar } from '@mui/material';
 
-
-const Header = () => {
-    return (
-        <HeaderContainer>
-            <HeaderLeft>
-                <HeaderAvater src=''/>
-                <AccessTime/>
-            </HeaderLeft>
-
-            <HeaderSearch>
-                <SearchIcon/>
-                <input type="text" placeholder='Search...' />
-            </HeaderSearch>
-            <HeaderRigth>
-                <HelpOutline/>
-            </HeaderRigth>
-        </HeaderContainer>
-    );
-}
- 
-export default Header;
 const HeaderRigth = styled.div`
     flex: 0.3;
     display: flex;
@@ -81,3 +58,4 @@ const HeaderAvater = styled(Avatar)`
         opacity: 0.8;
     }
 `;
+export {HeaderAvater,HeaderLeft,HeaderContainer,HeaderSearch,HeaderRigth}
