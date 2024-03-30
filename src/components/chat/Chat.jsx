@@ -5,19 +5,34 @@ import { selectRoomId } from "../../features/appSlice";
 import ChatInput from "./ChatInput";
 import { useCollection , useDocument} from 'react-firebase-hooks/firestore';
 import { db } from "../../firebase";
+import Message from "./Message";
+import { useEffect, useRef } from "react";
 
 
 const Chat = () => {
+    const chatRef = useRef(null);
     const roomId = useSelector(selectRoomId);
     const [roomDetails] = useDocument(
         roomId && db.collection('rooms').doc(roomId)
     )
-    const [roomMessages] = 
+    const [roomMessages, loading] = useCollection(
+        roomId && 
+        db
+        .collection('rooms')
+        .doc(roomId)
+        .collection('messages')
+        .orderBy('timestamp', 'asc')
+    )
+    useEffect(() => {
+        chatRef?.current.scrollIntoView({
+            behavior:'smooth'
+        });
+    },[roomId,loading])
     return (
        <ChatContainer>
             <Header>
                 <HeaderLeft>
-                    <h4><strong>#Room-name</strong></h4>
+                    <h4><strong>{`#${roomDetails?.data().name}`}</strong></h4>
                     <StarBorderOutlined/>
                 </HeaderLeft>
                 <HeaderRigth>
@@ -28,11 +43,22 @@ const Chat = () => {
             </Header>
 
             <ChatMessages>
-
+                {roomMessages?.docs.map(doc => {
+                    const{message,timestamp,user,image} = doc.data()
+                    return(
+                        <Message
+                        message={message}
+                        timestamp={timestamp}
+                        user={user}
+                        image={image}/>
+                    )
+                })}
+                <ChatBottom ref={chatRef}/>
             </ChatMessages>
             <ChatInput
+            chatRef={chatRef}
             channelId={roomId}
-            channelName={'channelName'}
+            channelName={roomDetails ?.data().name}
             />
        </ChatContainer>
     );
@@ -78,4 +104,7 @@ const HeaderRigth = styled.div`
         margin-right: 5px !important;
         font-size: 16px;
     }
+`;
+const ChatBottom = styled.div`
+padding-bottom:200px;
 `;
