@@ -1,12 +1,25 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
+import { auth, provider } from "../../firebase";
 
 const Login = () => {
+    const signIn = (e) => {
+        e.preventDefault();
+        auth.signInWithPopup(provider)
+        .catch((error) => 
+        alert(error.messsage))
+    }
     return (
         <LoginContainer>
             <LoginInnerContainer>
                 <img
                 src="https://www.uctoday.com/wp-content/uploads/2022/05/What-is-Slack-Connect.jpg"
                 />
+                <h1>Sign in to Filip's Chatapp</h1>
+                <p>filip.chatapp.com</p>
+                <Button onClick={signIn}>
+                    Sign in with Google
+                </Button>
             </LoginInnerContainer>
         </LoginContainer>
     );
@@ -31,5 +44,11 @@ const LoginInnerContainer = styled.div`
         object-fit: contain;
         height: 100px;
         margin-bottom: 40px;
+    }
+    >button{
+        margin-top: 50px;
+        text-transform: inherit !important;
+        background-color: #0a8d48 !important;
+        color: #fff;
     }
 `;

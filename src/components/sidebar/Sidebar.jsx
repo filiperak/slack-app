@@ -2,8 +2,10 @@ import { Add, Apps, AppsOutlined, BookmarkBorder, Create, Drafts, ExpandLess, Ex
 import styled from "styled-components";
 import SidebarOption from "./SidebarOption";
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import {SidebarInfo,SidebarHeader,SidebarContainer} from './sidebarStyle'
+import { useAuthState } from "react-firebase-hooks/auth";
+
 const Sidebar = () => {
     const [channels,loading,error] = useCollection(db.collection('rooms'));
 
@@ -41,3 +43,4 @@ const Sidebar = () => {
 }
  
 export default Sidebar;
+

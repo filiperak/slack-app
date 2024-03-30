@@ -7,11 +7,20 @@ import Sidebar from './components/sidebar/Sidebar';
 import Chat from './components/chat/Chat';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Login from './components/login/Login';
-import { Auth, onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from './firebase';
+import { SwapSpinner } from 'react-spinners-kit';
 
 function App() {
-  const [user,loading] = useAuthState(auth)
+  const [user,loading] = useAuthState(auth);
+  if(loading) {
+      return(
+          <AppLoading>
+              <AppLoadingContent>
+              <SwapSpinner/>
+              </AppLoadingContent>
+          </AppLoading>
+      )
+  }
   return (
     <div className="App">
       <Router>
@@ -38,4 +47,18 @@ export default App;
 const AppBody = styled.div`
   display:flex;
   height: 100vh;
+`;
+const AppLoading = styled.div`
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+`;
+const AppLoadingContent = styled.div`
+  text-align: center;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
