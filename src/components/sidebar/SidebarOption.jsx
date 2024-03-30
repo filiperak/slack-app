@@ -2,7 +2,7 @@ import { iconButtonClasses } from "@mui/material";
 import styled from "styled-components";
 import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
-import { enterRoom } from "../../features/appSlice";
+import { enterRoom, selectRoomId } from "../../features/appSlice";
 import {SidebarOptionContainer,SidebarOptionChannel} from './sidebarOptionStyle'
 
 const SidebarOption = ({Icon,title, addChanellOption,id}) => {

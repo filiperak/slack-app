@@ -1,12 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-//import { fetchCount } from './counter/counterAPI';
-
-// const initialState = {
-//   value: 0,
-//   status: 'idle',
-// };
-
-
 
 export const appSlice = createSlice({
   name: 'app',
@@ -21,9 +13,5 @@ export const appSlice = createSlice({
 });
 
 export const { enterRoom } = appSlice.actions;
-
 export const selectRoomId = (state) => state.app.roomId;
-
-
-
 export default appSlice.reducer;
