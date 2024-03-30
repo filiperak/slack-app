@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const Sidebar = () => {
     const [channels,loading,error] = useCollection(db.collection('rooms'));
+    const [user] = useAuthState(auth);
 
     return (
         <SidebarContainer>
@@ -16,10 +17,10 @@ const Sidebar = () => {
                     <h2>Filip's Slack</h2>
                     <h3>
                         <FiberManualRecord/>
-                        Filip Erak
+                        {user.displayName}
                     </h3>
                 </SidebarInfo>
-                <Create/>
+                <Create onClick={() => auth.signOut()}/>
             </SidebarHeader>
             <SidebarOption Icon={InsertComment} title='Threads'/>
             <SidebarOption Icon={Inbox} title='Mentions & reactions'/>
