@@ -17,5 +17,9 @@ const MessageInfo = styled.div`
         margin-left: 4px;
         font-size: 10px;
     }
+    >.MuiSvgIcon-root{
+        font-size: 18px;
+        cursor: pointer;
+    }
 `;
 export { MessageComponent, MessageInfo}
